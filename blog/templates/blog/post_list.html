@@ -1,17 +1,13 @@
-<html>
-    <head>
-        <title>Oguz Web Site</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="">Bu İlk Başlık ve Link</a></h1>
-        </div>
-	{% for post in posts %}
-		<div>
-			<h1><a href="">{{ post.baslik }}</a></h1>
-			<p>published: {{ post.yayinlanma_tarihi }}</p>
-			<p>{{ post.yazi|linebreaks }}</p>
-		</div>
-	{% endfor %}
-    </body>
-</html>
+{% extends 'blog/base.html' %}
+
+	{% block content %}
+            {% for post in posts %}
+                <div class="post">
+                    <div class="date">
+                        {{ post.yayinlanma_tarihi }}
+                    </div>
+                    <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.baslik }}</a></h1>
+                    <p>{{ post.yazi|linebreaks }}</p>
+                </div>
+            {% endfor %}
+	{% endblock content %}
